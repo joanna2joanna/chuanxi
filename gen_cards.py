@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # 生成小红书卡片 cards.html —— 网页内容原样流式分页，目标 18 页
 
+import math
 import re
 
 FLAG = ('<span style="background:var(--flag-blue)"></span>'
@@ -24,7 +25,7 @@ KEYS = ('<ul class="card__keys">'
 PAGE1 = [
   ('kicker', '李大妈的自驾路书'),
   ('h1', '<strong>川西自驾行前笔记</strong>'),
-  ('intro', '川西自驾，很多人把它当一次翻山越岭的行程，其实它更像一门功课：海拔怎么排、山河怎么切、车怎么开、信仰怎么认、手艺在哪儿、房子为什么长这样。这份笔记按开篇、六章、附录写，出发前读一遍，路上少踩坑。'),
+  ('intro', '川西自驾，很多人把它当一次翻山越岭的行程，其实它更像一门功课：海拔怎么排、山河怎么切、车怎么开、信仰怎么认、手艺在哪儿、房子为什么长这样。这份笔记按开篇、六章、附录写，<span class="nowrap">出发前读一遍，路上少踩坑。</span>'),
   ('meta', '<strong>更新于 2026年8月17日 · 封路、天气、信号等信息随季节变化，出发前以官方信息为准</strong>'),
   ('h2', '开篇　六把钥匙'),
   ('p', '这份笔记把川西当一门课来读。出发前读，是为了路上少踩坑；回来再读，是为了看懂路上见过的东西。'),
@@ -35,7 +36,7 @@ PAGE1 = [
 
 BODY_STREAM = [
   ('h3', '与人相处'),
-  ('p', '<strong>牧民。</strong> 牛羊是牧民的主要家当。路上遇到牧群，放慢、别鸣笛，等它们过。想拍牧民和牲畜，先打个招呼再举相机。牧场的帐篷和围栏别随便进。'),
+  ('p', '<strong>牧民。</strong> 牛羊是牧民的主要家当。路上遇到牧群，放慢、别鸣笛，等它们过。想拍牧民和牲畜，先打个招呼再举相机。牧场的帐篷和<span class="nowrap">围栏别随便进。</span>'),
   ('p', '<strong>匠人。</strong> 进工坊先问能不能看，问手艺、问工序，匠人愿意聊就聊，别上手碰工具和材料。买就买现货，半成品和机压仿品都别碰。'),
   ('p', '<strong>僧侣。</strong> 称呼用「师父」或「上师」。进大殿脱帽、轻声、顺时针走，不拍照、不指佛像。法会时安静看，不打断、不围观起哄。'),
   ('p', '<strong>司机和本地人。</strong> 见面一句「扎西德勒」，气氛就开了。问路、问价，态度客气，多数人都愿意答。高原上的人大多直接，不绕弯，你也直接点。'),
@@ -65,11 +66,11 @@ BODY_STREAM = [
   ('lead', '车是腿，慢是快。一半技术，一半克制。'),
   ('p', '川西路上要让的，是大货车和牧民的牛羊。弯道不超车，过牧群放慢、别鸣笛。<strong>让路是这条路的默认礼节</strong>。'),
   ('p', '高原开车有两个隐性风险。长下坡一直踩刹车会热衰减，要用低挡位和发动机制动；超车动力衰减，要留出比平原长得多的余量。冰雪路面上，四驱也一样打滑，<strong>慢才是安全</strong>。'),
-  ('p', '手机信号在县城和景区都有，支线基本没有。<strong>离开主路之前，先给家人或朋友发一个你的位置</strong>，让他们知道你在哪。进了支线，信号就断了，把没信号当默认状态。应急手段：中国电信有手机直连卫星业务，华为、小米等部分手机开通后，不换卡不换号就能在无信号区通话、发定位；雅安318自驾大本营有全国首个城市卫星服务站，可以租天通卫星设备，按天十元左右。'),
+  ('p', '手机信号在县城和景区都有，支线基本没有。<strong>离开主路之前，先给家人或朋友发一个你的位置</strong>，让他们知道你在哪。进了支线，信号就断了，把没信号当默认状态。应急手段：中国电信有手机直连卫星业务，华为、小米等部分手机开通后，不换卡不换号就能在无信号区通话、发定位；雅安318自驾大本营有全国首个城市卫星服务站，可以租天通卫星设备，<span class="nowrap">按天十元左右。</span>'),
   ('h3', '加油'),
   ('p', '加油站集中在县城和几个大镇，见油就加。认准中石油、中石化，避开私人黑站。理塘到稻城约300公里没有加油站，G317甘孜到德格一带靠马尼干戈这类节点补给。<strong>油箱过半就找下一个县城</strong>。'),
   ('h3', '充电'),
-  ('p', '川西这两年变化快。2025年6月甘孜州18个公路养护站和14个快充站投运，理塘到稻城段充电桩最大间距125公里；318沿线超300个充电桩，快充占七成以上。密度从东往西递减：成都到康定每30到50公里一个快充；康定、新都桥、雅江、理塘每80到150公里；理塘往稻城亚丁、新都桥往塔公八美每150到200公里。冷嘎措、格聂、若尔盖穿越段还是盲区。实际体验要打折：约一成五的桩故障或被燃油车占位，节假日热门站排队可能超一小时。高原续航缩水约三四成。<strong>电量低于三成就找桩</strong>，进景区前在县城充到八成以上。查桩用特来电、国网e充电、星星充电的App，或高德的新能源模式。'),
+  ('p', '川西这两年变化快。2025年6月甘孜州18个公路养护站和14个快充站投运，理塘到稻城段充电桩最大间距125公里；318沿线超300个充电桩，快充占七成以上。密度从东往西递减：成都到康定每30到50公里一个快充；康定、新都桥、雅江、理塘每80到150公里；理塘往稻城亚丁、新都桥往塔公八美每150到200公里。冷嘎措、格聂、若尔盖穿越段还是盲区。实际体验要打折：约一成五的桩故障或被燃油车占位，节假日热门站排队可能超一小时。高原续航缩水约三四成。<strong>电量低于三成就找桩</strong>，进景区前在县城充到八成以上。查桩用特来电、国网e充电、星星充电的App，或<span class="nowrap">高德的新能源模式。</span>'),
   ('h3', '封路信息'),
   ('p', '两类封路最常见：汛期6到8月塌方落石，抢修期间半幅放行或管制；冬季11月到次年3、4月冬管，比如九绵高速夜间20点到次日8点禁行，夹金山段整个冬天双向禁行，理小路冬天全段禁行。截至2026年8月17日，阿坝州正实行货车临时管制（过境4轴及以上货车白天7点到21点禁行），同时处在汛期，山洪预警可能随时发布。官方渠道：阿坝州政府官网阿坝路况专栏、四川发布和成都发布公众号、高速救援12122、报警96122。<strong>出发当天把官方路况和高德交叉看</strong>。'),
 
@@ -85,7 +86,7 @@ BODY_STREAM = [
   ('h2', '五　手艺的文明'),
   ('lead', '还在挣钱的传承，才是活传承。'),
   ('p', '麦宿在德格县金沙江东岸的河谷里，六千多居民有两千多位工匠，分布在三十多个工坊，做十六种手工艺。黑陶、铜铸、唐卡、木雕、藏香、藏纸、藏戏面具、金银加工、牛羊毛编织，门类很多，被称为「中国藏族传统手工艺之乡」。<strong>它是一门还在正常运转的产业，不是摆在展柜里的「非遗秀」</strong>。寺庙要佛像法器，本地人过日子要锅碗和经堂装饰，订单一直不断。最出名的铜铸佛像，老匠人夏雷尼玛的鎏金铜是内地近乎失传的古法，他做的佛像因为工艺古朴精良，常被人冒充古董倒卖，甚至流到了国外。他的女儿拍了部《麦宿泥塑》的纪录片，拿过国际手工艺纪录片的一等奖。钦乐工坊还在用砂模、失蜡法铸利玛铜。后来县里建了扶贫车间，挂出「麦宿手造」的品牌，2024年还到成都开了集市。去看麦宿，直接进工坊，从一块铜皮到一尊佛像，流程本身就值得看完。想买的话，认准手工工坊里的现货，别买机压翻模的仿品。'),
-  ('p', '白玉河坡号称「格萨尔王的兵器库」，1300多年前就开始铸兵器，现在是国家级非遗「藏族金属锻造技艺」的代表，白玉藏刀最有名。13个行政村、230多家非遗工坊，<strong>是全国最大的藏族金属锻造群落</strong>，年订单超过1200万元。2025年8月，河坡手工艺文旅体融合园区开园，建了藏族金工博物馆。'),
+  ('p', '白玉河坡号称「格萨尔王的兵器库」，1300多年前就开始铸兵器，现在是国家级非遗「藏族金属锻造技艺」的代表，白玉藏刀最有名。13个行政村、230多家非遗工坊，<strong>是全国最大的藏族金属锻造群落</strong>，年订单超过1200万元。2025年8月，河坡手工艺文旅体融合园区开园，建了<span class="nowrap">藏族金工博物馆。</span>'),
   ('p', '壤塘在阿坝州，藏语意思是「财神居住的地方」，核心是觉囊文化。2010年建起第一个觉囊唐卡传习所，<strong>免费教贫困家庭的青少年，一学六到八年</strong>。现在有20多个传习所、3项国家级非遗，壤巴拉非遗传习创业园8万多平方米，聚集唐卡、藏医药、藏陶、藏毯等16类手艺，2024年产值两千多万元。县里还在北京、上海、成都、深圳设了传习基地，60名学员接过故宫藏品唐卡复制的项目。觉囊唐卡工坊进了全国「非遗工坊典型案例」。'),
   ('p', '德格印经院本身是一门还在运转的印刷产业。1729年建，藏了32万余块雕版，其中古旧印版22.8万块，<strong>是全世界手工木刻印版藏量最多的地方</strong>。经版内容不止经文：宗教、历史、医学、天文历算、文学、艺术都有，「藏文化大百科全书」这个外号就是这么来的。'),
   ('p', '印刷是流水线工序：裁纸、泡纸、兑墨、研朱砂、印刷、晾晒、分页、核对、装订，十几道。印经书三人一组，一高一矮相对坐，高者固定印纸刷墨，矮者递纸、用卷布滚筒滚印，配合熟练的一天印2400张4800页。材料也讲究：<strong>藏纸用瑞香狼毒草的根，含毒，虫不蛀、鼠不咬</strong>；雕版用海拔3000米以上的红桦木，微火熏烤、水煮、烘干，刻好的版要过12次审校，在酥油里泡一天才算完成。'),
@@ -93,9 +94,9 @@ BODY_STREAM = [
 
   ('h2', '六　建筑的方言'),
   ('lead', '材料决定房子。'),
-  ('p', '建筑是材料和海拔的答案。石、木、土，各取所需，<strong>房子就是环境的说明书</strong>。'),
+  ('p', '建筑是材料和海拔的答案。石、木、土，各取所需，<span class="nowrap"><strong>房子就是环境的说明书</strong>。</span>'),
   ('p', '嘉绒藏寨与古碉，在丹巴一带最出名。石木结构，片石砌墙，房子依山势叠在山坡上，顶层外缘围一圈黄、黑、白三色带。甲居藏寨评上「中国最美的六大乡村古镇」之首，中路藏寨海拔2100米。丹巴古碉鼎盛时号称「千碉之国」，中路现存81座，梭坡乡84座，<strong>是全世界古碉最集中的地方</strong>。碉楼按功能分要隘碉、烽火碉、寨碉、家碉四类，还分雌雄，最早的能追溯到两千多年前的汉代。'),
-  ('p', '古碉的来历比寨子长。雏形约3500年前就出现，和丹巴中路罕额依的新石器遗址一脉相承。汉代，这一带的冉駹夷为抵御北方游牧羌人的进攻，在石室基础上建起碉楼，《后汉书》记载他们「累石为室，高者至十余丈，为邛笼」，邛笼就是碉楼。明清碉楼最多时约3000座（清康熙年间按4283户推算）。乾隆两次用兵大小金川，前后打了十几年，金川「地险碉坚」，清军动火炮才拿下。防御做得很细：碉门开在二层楼高的位置，战时收独木梯、关碉门；射击孔做成喇叭形，墙外收窄、墙内放宽，挡得住箭，又不挡视线；墙底厚1.5到2米，顶部收薄到0.5到0.6米。还有一条老规矩：谁家生了男孩就修高碉，<strong>男孩长到18岁，碉楼修完18层，办完成人礼才成家</strong>。'),
+  ('p', '古碉的来历比寨子长。雏形约3500年前就出现，和丹巴中路罕额依的新石器遗址一脉相承。汉代，这一带的冉駹夷为抵御北方游牧羌人的进攻，在石室基础上建起碉楼，《后汉书》记载他们「累石为室，高者至十余丈，为邛笼」，邛笼就是碉楼。明清碉楼最多时约3000座（清康熙年间按4283户推算）。乾隆两次用兵大小金川，前后打了十几年，金川「地险碉坚」，清军动火炮才拿下。防御做得很细：碉门开在二层楼高的位置，战时收独木梯、关碉门；射击孔做成喇叭形，墙外收窄、墙内放宽，挡得住箭，又不挡视线；墙底厚1.5到2米，顶部收薄到0.5到0.6米。还有一条老规矩：<span class="nowrap">谁家</span>生了男孩就修高碉，<strong>男孩长到18岁，碉楼修完18层，<span class="nowrap">办完成人礼才成家</span></strong>。'),
   ('p', '藏寨的结构，从下到上一条线。以甲居藏寨为例，石木结构，三到四层，各层逐层内收，顶上留出晒粮平台。底层圈养牲畜兼做仓库，畜圈的门和人进出的门分开；二层是锅庄火塘、厨房和客堂，一家人围着火塘吃饭说话，是日常生活的中心；三层住人；顶层是经堂，全楼装饰最华美、画满壁画，长者交出管家权后在这里吃斋念经，办婚丧嫁娶时做法事的喇嘛也暂住这层。屋顶四角各凸起一个白石塔，代表山、树、水、地四方神灵，上插经幡；楼沿中间有煨桑炉，有大事时点柏枝祭神。<strong>藏人把这套布局看成一张「六道轮回图」：底层是牲畜，中层是凡间，顶层是精神世界。</strong>层与层之间用独木梯上下。'),
   ('p', '道孚崩科，是另一条路线。「崩」是以木为框架，「科」是房子。圆木对劈、卯榫咬合，<strong>整栋房不用一颗铁钉</strong>。上世纪70年代鲜水河流域大地震，片石墙房成片倒塌，工匠们发现德格一带的「崩科」抗震厉害，道孚重建时把这套做法吸收过来。崩科大小以「空」计数，四根柱子之间算一空，约25平方米。室内精雕细镂、描金绘彩，外号「民间故宫」。'),
   ('p', '寺院建筑，有一套固定骨架：大经堂（指钦）是核心，佛学院（礼仓）、佛殿（拉康）、印经院在侧，整体依山而建，不追求中轴线对称。大经堂空间高阔、柱网密集，阿坝格尔登寺的大经堂有120根柱子。<strong>金顶是等级的标志</strong>，重檐歇山、铜瓦鎏金，顶上立镏金宝瓶、法轮金鹿，是藏汉结合的做法，色达东嘎寺主殿金顶用真金箔，几公里外都看得见。辩经场挨着佛学院，僧人在空地上拍掌问答；转经廊绕着佛堂或佛塔排满转经轮，格尔登寺49米高的佛塔外围有几百个小转经轮。各教派都能看：理塘长青春科尔寺1580年建，占地33万平方米，是康区规模最大的格鲁寺；马尔康大藏寺是嘉绒碉房式；木雅地区还有汉藏结合的碉楼经堂。苯教寺院另成一路，金川雍忠拉顶寺是代表。'),
@@ -128,7 +129,7 @@ APPENDIX = [
   ('cwords', '<li><b>香巴拉深处</b>纪录片，2018，豆瓣8.7。四川藏区人文，理塘、金川、稻城亚丁都在片里，讲普通人过日子</li>'
              '<li><b>第三极</b>纪录片，青藏高原全貌，和《香巴拉深处》同一个总制片人</li>'
              '<li><b>尘埃落定</b>阿来，2000年茅盾文学奖。写阿坝马尔康的嘉绒土司，路上看的碉楼寨房就是小说里的世界</li>'
-             '<li><b>艽野尘梦</b>陈渠珍。清末川藏亲历记，羌塘逃生115人活7人，跳过导读读正文</li>'),
+             '<li><b>艽野尘梦</b>陈渠珍。清末川藏亲历记，羌塘逃生115人活7人，<span class="nowrap">跳过导读读正文</span></li>'),
 ]
 
 CSS = """
@@ -137,9 +138,10 @@ CSS = """
     --paper:#ece5d4;
     --dim:#a89f8a;
     --vermilion:#c1493f;
+    --vermilion-deep:#a83a30;
     --gold:#d9b23c;
     --flag-blue:#2f6fd0;
-    --flag-white:#ece5d4;
+    --flag-white:#ffffff;
     --flag-red:#d9553f;
     --flag-yellow:#d9b23c;
     --flag-green:#3d9e7f;
@@ -147,6 +149,8 @@ CSS = """
     --sans:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{margin:0;padding:0;}
+  html{background:#3a4152;}
   body{background:#3a4152;padding:0;font-family:var(--serif);}
 
   .card{
@@ -159,7 +163,7 @@ CSS = """
   }
   .card + .card{margin-top:64px;}
 
-  .flag{display:flex;height:14px;width:100%;}
+  .flag{display:flex;height:14px;width:100%;flex-shrink:0;}
   .flag span{flex:1;}
 
   .card__inner{
@@ -185,13 +189,13 @@ CSS = """
   }
 
   .card h2{
-    font-size:36px;font-weight:700;color:var(--gold);
+    font-size:36px;font-weight:700;color:var(--vermilion-deep);
     text-align:center;letter-spacing:.12em;line-height:1.5;
     margin:30px 0 20px;
   }
   .card h3{
     font-family:var(--sans);font-size:26px;font-weight:600;
-    letter-spacing:.24em;color:var(--gold);
+    letter-spacing:.24em;color:var(--vermilion-deep);
     margin:34px 0 14px;
   }
   .card__lead{
@@ -220,10 +224,10 @@ CSS = """
     font-family:var(--sans);letter-spacing:.06em;white-space:nowrap;
   }
 
-  .card ul.card__list{list-style:none;margin:6px 0 0;}
+  .card ul.card__list{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
   .card__list li{padding:.28em 0;padding-left:1.1em;position:relative;}
   .card__list li:before{content:"·";position:absolute;left:0;color:var(--vermilion);}
-  .card ul.card__cwords{list-style:none;margin:6px 0 0;}
+  .card ul.card__cwords{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
   .card__cwords li{padding:.24em 0;}
   .card__cwords b{
     display:inline-block;min-width:4.6em;color:var(--vermilion);font-weight:600;
@@ -232,11 +236,12 @@ CSS = """
 
   .card p,.card li{text-wrap:pretty;}
   .card h1,.card h2,.card h3{text-wrap:balance;}
+  .card .nowrap{white-space:nowrap;}
 
   .card__foot{
     margin-top:auto;display:flex;justify-content:space-between;align-items:center;
     font-family:var(--sans);color:var(--dim);
-    font-size:20px;letter-spacing:.14em;padding-top:36px;
+    font-size:20px;letter-spacing:.14em;padding-top:36px;flex-shrink:0;
   }
   .card__foot .foot-flag{display:flex;height:5px;width:96px;}
   .card__foot .foot-flag span{flex:1;}
@@ -250,49 +255,85 @@ JS = """
       var idx = parseInt(q,10) - 1;
       var cards = document.querySelectorAll('.card');
       cards.forEach(function(c,i){ c.style.display = (i === idx) ? 'flex' : 'none'; });
+      var c = cards[idx];
+      if (c){ c.style.margin = '0 auto'; }
+      window.scrollTo(0,0);
     }
   })();
 </script>
 """
 
 
-def text_len(html):
-    return len(re.sub(r'<[^>]+>', '', html))
+CPL = 32   # 正文一行约能放的字数（内容区 952px / 29px）
+LHP = 56   # 正文一行高度（29px × 1.92）
 
 
-def partition(stream, W):
+def _lines(t):
+    return max(1, math.ceil(len(t) / CPL))
+
+
+def block_height(kind, html):
+    """按 CSS 实际尺寸估算块高度（px），用于防止内容超高、页脚被挤出卡片。"""
+    t = re.sub(r'<[^>]+>', '', html)
+    if kind == 'kicker':
+        return 49  # 21px×1.4 + 下 margin 20
+    if kind == 'h1':
+        return 78  # 56px×1.4，单行
+    if kind == 'intro':
+        return math.ceil(len(t) / 36) * 49 + 34  # 26px×1.9，内容区能放约 36 字/行
+    if kind == 'meta':
+        return math.ceil(len(t) / 43) * 37 + 6  # 22px×1.7，约 43 字/行
+    if kind == 'h2':
+        return 104  # 36px×1.5 + 上下 margin 50
+    if kind == 'h3':
+        return 85   # 26px×1.4 + 上下 margin 48
+    if kind == 'lead':
+        return math.ceil(len(t) / 31) * 57 + 28  # 30px×1.9，内容区去掉左边竖线留白
+    if kind == 'keys':
+        return 524  # 6 项 × 77 + 上下 margin 62
+    if kind in ('list', 'cwords'):
+        pad = 16 if kind == 'list' else 14
+        items = re.findall(r'<li>(.*?)</li>', html, re.S)
+        h = 6  # ul 上 margin
+        for it in items:
+            h += _lines(re.sub(r'<[^>]+>', '', it)) * LHP + pad
+        return h
+    return _lines(t) * LHP + 29  # 普通段落 + 下 margin 1em
+
+
+def partition(stream, H):
     pages = []
     cur = []
-    cur_len = 0
+    cur_h = 0
     n = len(stream)
     i = 0
     while i < n:
         kind, html = stream[i]
-        ch = text_len(html)
+        bh = block_height(kind, html)
         if kind == 'h2':
             if cur:
                 pages.append(cur)
                 cur = []
-                cur_len = 0
+                cur_h = 0
             cur.append((kind, html))
-            cur_len = ch
+            cur_h = bh
         elif kind == 'h3':
             # 小标题必须跟它的正文同页：按「h3 + 下一块」估量
             nxt = stream[i + 1] if i + 1 < n else None
-            need = ch + (text_len(nxt[1]) if nxt else 0)
-            if cur and cur_len + need > W:
+            need = bh + (block_height(nxt[0], nxt[1]) if nxt else 0)
+            if cur and cur_h + need > H:
                 pages.append(cur)
                 cur = []
-                cur_len = 0
+                cur_h = 0
             cur.append((kind, html))
-            cur_len += ch
+            cur_h += bh
         else:
-            if cur and cur_len + ch > W:
+            if cur and cur_h + bh > H:
                 pages.append(cur)
                 cur = []
-                cur_len = 0
+                cur_h = 0
             cur.append((kind, html))
-            cur_len += ch
+            cur_h += bh
         i += 1
     if cur:
         pages.append(cur)
@@ -329,7 +370,7 @@ def render_card(i, blocks):
     for kind, html in blocks:
         inner.append(kind_html(kind, html))
     inner.append('<div class="card__foot">')
-    inner.append('<span>川西自驾行前笔记</span>')
+    inner.append('<span>李大妈自驾路书</span>')
     inner.append('<span class="foot-flag" aria-hidden="true">' + FLAG + '</span>')
     inner.append('<span>' + ('%02d' % i) + '</span>')
     inner.append('</div>')
@@ -339,20 +380,37 @@ def render_card(i, blocks):
 
 def main():
     # 总页数 = 页1 + 正文分页 + 附录2页，目标是 18
+    # 内容区可用高度约 1262px，页脚占约 64px，正文安全上限取 1200 左右
     counts = {}
-    for W in range(300, 701, 5):
-        n = 1 + len(partition(BODY_STREAM, W)) + 2
-        counts.setdefault(n, W)
+    for H in range(980, 1401, 5):
+        n = 1 + len(partition(BODY_STREAM, H)) + 2
+        counts.setdefault(n, H)
     target = counts.get(18)
     if target is None:
         keys = sorted(counts.keys())
         near = min(keys, key=lambda k: abs(k - 18))
         target = counts[near]
-        print('note: no W gives 18; using %d pages (W=%d)' % (near, target))
+        print('note: no H gives 18; using %d pages (H=%d)' % (near, target))
 
     body_pages = partition(BODY_STREAM, target)
+    # 合并孤页：单块且高度很小（≤300px）的页并入前一页，如第13页并入第12页
+    merged = []
+    for pg in body_pages:
+        h_pg = sum(block_height(k, hh) for k, hh in pg)
+        if merged and len(pg) == 1 and h_pg <= 300 and merged[-1][1] + h_pg <= target + 60:
+            merged[-1][0].extend(pg)
+            merged[-1][1] += h_pg
+        else:
+            merged.append([pg, h_pg])
+    body_pages = [pg for pg, _ in merged]
+
     pages = [PAGE1] + body_pages + [APPENDIX[:5], APPENDIX[5:]]
     cards = [render_card(i, blocks) for i, blocks in enumerate(pages, 1)]
+
+    for idx, blocks in enumerate(pages, 1):
+        h = sum(block_height(k, hh) for k, hh in blocks)
+        flag = '  <-- 超限!' if h > target else ''
+        print('card-%02d: 估算 %3dpx / H=%d%s' % (idx, h, target, flag))
 
     html = ('<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
@@ -362,7 +420,7 @@ def main():
             '\n\n' + JS + '\n</body>\n</html>\n')
     with open('cards.html', 'w', encoding='utf-8') as f:
         f.write(html)
-    print('W=%d total pages=%d' % (target, len(pages)))
+    print('H=%d total pages=%d' % (target, len(pages)))
 
 
 if __name__ == '__main__':
