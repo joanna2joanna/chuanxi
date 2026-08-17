@@ -1,0 +1,352 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# 生成小红书卡片 cards.html —— 内容从 index.html 原文搬运，不改字
+
+FLAG = ('<span style="background:var(--flag-blue)"></span>'
+        '<span style="background:var(--flag-white)"></span>'
+        '<span style="background:var(--flag-red)"></span>'
+        '<span style="background:var(--flag-yellow)"></span>'
+        '<span style="background:var(--flag-green)"></span>')
+
+CARDS = [
+  dict(title='川西的六把钥匙', sub='开篇', lead='',
+    body=[
+      '<p>出发前读，是为了路上少踩坑；回来再读，是为了看懂路上见过的东西。</p>',
+      '<ul class="card__keys">'
+      '<li>海拔决定秩序<b>高原的秩序</b></li>'
+      '<li>山河决定地图<b>山河的地图</b></li>'
+      '<li>车是腿，慢是快<b>路上的驾驶学</b></li>'
+      '<li>看墙色认教派<b>信仰的世界</b></li>'
+      '<li>手艺是还在运转的产业<b>手艺的文明</b></li>'
+      '<li>材料决定房子<b>建筑的方言</b></li>'
+      '</ul>',
+      '<p>还有一套和人打交道的规矩，出发前就记下，比攻略好使。</p>',
+    ]),
+
+  dict(title='高原的秩序', sub='一 · 高原的秩序',
+    lead='海拔决定秩序。3000米是分界线，行程和身体都按它排。',
+    body=[
+      '<p>进川西先认海拔。<strong>3000米是一道门槛</strong>，多数人的高反从这里开始。行程按海拔排，不按景点排：一天的路程控制在两三小时山路，下午留白看天，天气不对就提前收车。景点不会消失，路况和天气才是当天的变量。</p>',
+      '<p>选窗口期。<strong>5到6月、9到10月中是全年最稳的时段</strong>。雨季6到8月以夜雨为主，白天多数能走。冬季也能走，但救援半径长，一台车陷在无人垭口，代价远超省下的时间。</p>',
+    ]),
+
+  dict(title='山河的地图', sub='二 · 山河的地图',
+    lead='山河决定地图。山脉怎么切，路就怎么修。',
+    body=[
+      '<p>山脉全是南北走向。横断山把川西切成一列列山岭，从东往西：邛崃山，四姑娘山在主脊上；大雪山，<strong>贡嘎山海拔7508.9米，蜀山之王</strong>；沙鲁里山；雀儿山。山与山之间夹着河谷，路顺着河谷修，镇子落在河谷里。</p>',
+      '<p>河流往三处去。东部是大渡河，小金、金川、丹巴都在它的水系里；雅砻江从甘孜县城边流过；金沙江是德格的西界，德格县城在金沙江东岸。<strong>三条江在横断山南部并流，就是地理上的三江并流</strong>。</p>',
+    ]),
+
+  dict(title='与人相处', sub='开篇 · 与人相处', lead='',
+    body=[
+      '<p><strong>牧民。</strong> 牛羊是牧民的主要家当。路上遇到牧群，放慢、别鸣笛，等它们过。想拍牧民和牲畜，先打个招呼再举相机。牧场的帐篷和围栏别随便进。</p>',
+      '<p><strong>匠人。</strong> 进工坊先问能不能看，问手艺、问工序，匠人愿意聊就聊，别上手碰工具和材料。买就买现货，半成品和机压仿品都别碰。</p>',
+      '<p><strong>僧侣。</strong> 称呼用「师父」或「上师」。进大殿脱帽、轻声、顺时针走，不拍照、不指佛像。法会时安静看，不打断、不围观起哄。</p>',
+      '<p><strong>司机和本地人。</strong> 见面一句「扎西德勒」，气氛就开了。问路、问价，态度客气，多数人都愿意答。高原上的人大多直接，不绕弯，你也直接点。</p>',
+      '<p><strong>买东西。</strong> 讲好价就认，不反复缠价。看上了再还价，不想要就别乱压价，压完不买最伤和气。</p>',
+      '<p><strong>拍照。</strong> 拍人先问，拍寺院内部和法会先看有没有禁令，天葬禁区一次都不要靠近。相机镜头对着人的时候，先问一句，多数人会同意的。</p>',
+      '<p>这几条记住，路上能少很多误会。</p>',
+    ]),
+
+  dict(title='高反与补给', sub='一 · 高原的秩序', lead='',
+    body=[
+      '<p>高反怎么防。从低到高慢慢爬，头两天别直接上3500米以上过夜。氧气不足的典型信号是头痛、睡不着、没胃口，多数人两三天能适应。乙酰唑胺要遵医嘱提前吃，布洛芬缓解头痛，红景天提前一周吃，只作辅助。备一个指夹式血氧仪，<strong>血氧掉到90%以下就停下来别硬撑</strong>。夜里头痛加重、白天精神很差、走路发飘，是危险信号，赶紧撤到低海拔。</p>',
+      '<p>补给认准县城。<strong>进县城就把油加满</strong>，一离开县城就默认补给消失，越往深处走，越要当天往返。</p>',
+      '<p>出发前把离线地图下好，<strong>自救物资可以不用，但不能没有</strong>。冬季走，车上常备防滑链。</p>',
+    ]),
+
+  dict(title='山河的来历', sub='二 · 山河的地图', lead='',
+    body=[
+      '<p>先看川西怎么来的。约4000万到5000万年前，印度板块撞上欧亚板块，把一片浅海抬成陆地，就是青藏高原，川西在高原的东南缘。碰撞到现在没停，高原还在缓慢升高，这也是川西地震多的原因。</p>',
+      '<p>海子是古冰川留下的湖。冰期冰川刨出的洼地积水成湖，理塘到稻城之间的海子山，古冰川退去后留下<strong>1145个高原湖泊</strong>。单个看，康定的木格措、九龙的伍须海、巴塘的措普湖各有各的颜色，德格雀儿山下的新路海紧挨着雪峰。</p>',
+      '<p>川西地震多，因为它在<strong>鲜水河断裂带</strong>上。这条断裂带从中部纵贯，历史上强震不断。对旅行者，它意味着两件事：路况随时可能因塌方管制，很多陡崖和河谷的走向，就是断裂带运动的痕迹。</p>',
+    ]),
+
+  dict(title='植被与饮食', sub='二 · 山河的地图', lead='',
+    body=[
+      '<p>植被随海拔分层，从山谷到垭口一路换。2500米以下是针阔混交林；2500到3500米是云杉冷杉的针叶林，高山杜鹃夹在林里，<strong>康定荷花海有1500公顷的高山杜鹃林</strong>，多是百年以上的老林，每年四月底五月初成片开花；3500到4500米是高山灌丛和高山草甸，冬虫夏草、雪茶都长在这一层；4500米以上是流石滩，雪莲贴着碎石长。翻垭口的路上，从针叶林到流石滩，一路换着看。</p>',
+      '<p>吃的也跟海拔走。青稞是高原的当家作物，炒熟磨成糌粑，拌上酥油茶捏成团，是藏人的日常主食；酥油茶用砖茶和酥油熬，热量高、解渴御寒，当地有<strong>「宁可三日无肉，不可一日无茶」</strong>的说法。牦牛在海拔3500米以上放养，肉干、火锅、炖汤都常见；血肠是待客的上等菜，牛血或羊血和肉丁灌进小肠煮熟。松茸这类菌子长在森林里，集中在金沙江、雅砻江、大渡河上中游的高山峡谷，夏秋下过雨就冒头，炖鸡、涮锅都鲜。这些不用刻意找，路边饭馆的菜单上就有。</p>',
+    ]),
+
+  dict(title='路上的驾驶学', sub='三 · 路上的驾驶学',
+    lead='车是腿，慢是快。一半技术，一半克制。',
+    body=[
+      '<p>川西路上要让的，是大货车和牧民的牛羊。弯道不超车，过牧群放慢、别鸣笛。<strong>让路是这条路的默认礼节</strong>。</p>',
+      '<p>高原开车有两个隐性风险。长下坡一直踩刹车会热衰减，要用低挡位和发动机制动；超车动力衰减，要留出比平原长得多的余量。冰雪路面上，四驱也一样打滑，<strong>慢才是安全</strong>。</p>',
+      '<p>手机信号在县城和景区都有，支线基本没有。<strong>离开主路之前，先给家人或朋友发一个你的位置</strong>，让他们知道你在哪。进了支线，信号就断了，把没信号当默认状态。应急手段：中国电信有手机直连卫星业务，华为、小米等部分手机开通后，不换卡不换号就能在无信号区通话、发定位；雅安318自驾大本营有全国首个城市卫星服务站，可以租天通卫星设备，按天十元左右。</p>',
+    ]),
+
+  dict(title='加油与充电', sub='三 · 路上的驾驶学', lead='',
+    body=[
+      '<p>加油站集中在县城和几个大镇，见油就加。认准中石油、中石化，避开私人黑站。理塘到稻城约300公里没有加油站，G317甘孜到德格一带靠马尼干戈这类节点补给。<strong>油箱过半就找下一个县城</strong>。</p>',
+      '<p>川西这两年变化快。2025年6月甘孜州18个公路养护站和14个快充站投运，理塘到稻城段充电桩最大间距125公里；318沿线超300个充电桩，快充占七成以上。密度从东往西递减：成都到康定每30到50公里一个快充；康定、新都桥、雅江、理塘每80到150公里；理塘往稻城亚丁、新都桥往塔公八美每150到200公里。冷嘎措、格聂、若尔盖穿越段还是盲区。实际体验要打折：约一成五的桩故障或被燃油车占位，节假日热门站排队可能超一小时。高原续航缩水约三四成。<strong>电量低于三成就找桩</strong>，进景区前在县城充到八成以上。查桩用特来电、国网e充电、星星充电的App，或高德的新能源模式。</p>',
+    ]),
+
+  dict(title='封路信息', sub='三 · 路上的驾驶学', lead='',
+    body=[
+      '<p>两类封路最常见：汛期6到8月塌方落石，抢修期间半幅放行或管制；冬季11月到次年3、4月冬管，比如九绵高速夜间20点到次日8点禁行，夹金山段整个冬天双向禁行，理小路冬天全段禁行。截至2026年8月17日，阿坝州正实行货车临时管制（过境4轴及以上货车白天7点到21点禁行），同时处在汛期，山洪预警可能随时发布。官方渠道：阿坝州政府官网阿坝路况专栏、四川发布和成都发布公众号、高速救援12122、报警96122。<strong>出发当天把官方路况和高德交叉看</strong>。</p>',
+    ]),
+
+  dict(title='教派的世界', sub='四 · 信仰的世界',
+    lead='看墙色，认教派。',
+    body=[
+      '<p>先看川西在藏文化版图里的位置。藏区习惯分成三大块：拉萨一带的卫藏，青海甘肃的安多，还有以甘孜、昌都为核心的康巴。康巴人性格外放，「康巴汉子」的名声就是这么来的。和卫藏、安多不同，川西<strong>没有哪个教派一家独大</strong>。甘孜州515座寺院里，宁玛派220座、格鲁派129座、萨迦派78座、苯教51座、噶举派37座。想把藏传佛教五大教派一次看全，川西是最好的窗口，别处凑不齐。</p>',
+      '<p>认教派最简单的方法，看寺庙外墙的颜色。宁玛派叫红教，是最古老的派别，多随牧区分布。萨迦派叫花教，寺墙刷红、白、黑三色条纹，据说是文殊、观音、金刚手三位菩萨的象征。噶举派叫白教，叫法来自早期僧人穿白衣的传承，四川藏区的祖寺是德格的八邦寺。格鲁派叫黄教，传入最晚，理塘的长青春科尔寺是四川第一座格鲁派寺院。还有苯教，比藏传佛教更古老的本地信仰，它在川西的地位比在西藏老家还高，<strong>四川的苯教寺庙数量全国第一</strong>，阿坝金川的雍忠拉顶寺一带被称为「第二象雄」。</p>',
+    ]),
+
+  dict(title='德格与路上的符号', sub='四 · 信仰的世界', lead='',
+    body=[
+      '<p>最特别的是德格。历代德格土司推行「不分教派、一律扶持」的政策，硬是把五大教派全留在自家地盘上，这在藏区很少见，<strong>德格也因此成了藏文化的三大中心之一</strong>。印经院1729年建，由萨迦派更庆寺管理，藏了三十多万块木刻经版，是全世界最大的木刻雕版印刷机构。</p>',
+      '<p>路上的符号，看得懂会很有意思。经幡也叫风马旗，五种颜色对应蓝天、白云、红火、江河、大地，挂在山顶风口，<strong>藏人相信风吹动一次等于诵经一次</strong>。玛尼堆是刻了六字真言的石块堆，路人经过会念着真言添一块石头，别搬走当纪念品。白塔源于古印度的覆钵式佛塔，路过可以捡块石头放上去，或者献条哈达许个愿。转经筒里装着经文，转一圈等于念诵一遍，藏人转经廊、转佛塔、转寺院都是这个逻辑。六字真言「唵嘛呢叭咪吽」是观世音菩萨的总持咒，被看作雪域佛法最根本的念诵。</p>',
+    ]),
+
+  dict(title='佐钦寺的大圆满塔', sub='四 · 信仰的世界', lead='',
+    body=[
+      '<p>德格县有座佐钦寺，宁玛派的祖寺之一，寺里的<strong>大圆满塔</strong>和尼泊尔加德满都的博达哈大佛塔长得一样。两座塔同源：古印度的覆钵式佛塔。佛陀涅槃后，舍利分装进覆钵形的土冢，这种形制传到尼泊尔，博达哈成了全世界最大的覆钵塔；传到中国内地，13世纪尼泊尔工匠阿尼哥建的北京妙应寺白塔，把藏式瓶形塔的样式定了型。佐钦寺的大圆满塔，用的就是同一套形制。</p>',
+    ]),
+
+  dict(title='和信仰打交道', sub='四 · 信仰的世界', lead='',
+    body=[
+      '<p>和信仰打交道，分寸比知识重要。<strong>绕行一律顺时针，只有苯教是逆时针</strong>，遇到别懵。磕长头是身敬、语敬、意敬三者合一，额头叩地的瞬间，心里同时念咒、观想，这是他们能磕几千公里的原因。煨桑是烧香柏枝，敬献给神佛的香火，也是祈愿的仪式。献哈达要看对象：白色最普遍，黄色献给活佛和高僧，五彩哈达被视为菩萨的衣裳，只在隆重场合用。哈达只递到对方手里，不能挂脖子上，只有长辈给晚辈才往脖子上搭。天葬是藏人把遗体布施给神鹰，被认为是最高的舍身布施，全程严禁围观、严禁拍照，法律明令禁止，连打听都不要。还有几条硬规矩：不摸别人的头，佛像、唐卡、经书不指，非要指就五指并拢、手心朝上，不进人家供奉的佛堂，不取献给塔上的供品，过门槛不踩。</p>',
+    ]),
+
+  dict(title='麦宿的手艺', sub='五 · 手艺的文明',
+    lead='还在挣钱的传承，才是活传承。',
+    body=[
+      '<p>麦宿在德格县金沙江东岸的河谷里，六千多居民有两千多位工匠，分布在三十多个工坊，做十六种手工艺。黑陶、铜铸、唐卡、木雕、藏香、藏纸、藏戏面具、金银加工、牛羊毛编织，门类很多，被称为「中国藏族传统手工艺之乡」。<strong>它是一门还在正常运转的产业，不是摆在展柜里的「非遗秀」</strong>。寺庙要佛像法器，本地人过日子要锅碗和经堂装饰，订单一直不断。最出名的铜铸佛像，老匠人夏雷尼玛的鎏金铜是内地近乎失传的古法，他做的佛像因为工艺古朴精良，常被人冒充古董倒卖，甚至流到了国外。他的女儿拍了部《麦宿泥塑》的纪录片，拿过国际手工艺纪录片的一等奖。钦乐工坊还在用砂模、失蜡法铸利玛铜。后来县里建了扶贫车间，挂出「麦宿手造」的品牌，2024年还到成都开了集市。去看麦宿，直接进工坊，从一块铜皮到一尊佛像，流程本身就值得看完。想买的话，认准手工工坊里的现货，别买机压翻模的仿品。</p>',
+    ]),
+
+  dict(title='河坡与壤塘', sub='五 · 手艺的文明', lead='',
+    body=[
+      '<p>白玉河坡号称「格萨尔王的兵器库」，1300多年前就开始铸兵器，现在是国家级非遗「藏族金属锻造技艺」的代表，白玉藏刀最有名。13个行政村、230多家非遗工坊，<strong>是全国最大的藏族金属锻造群落</strong>，年订单超过1200万元。2025年8月，河坡手工艺文旅体融合园区开园，建了藏族金工博物馆。</p>',
+      '<p>壤塘在阿坝州，藏语意思是「财神居住的地方」，核心是觉囊文化。2010年建起第一个觉囊唐卡传习所，<strong>免费教贫困家庭的青少年，一学六到八年</strong>。现在有20多个传习所、3项国家级非遗，壤巴拉非遗传习创业园8万多平方米，聚集唐卡、藏医药、藏陶、藏毯等16类手艺，2024年产值两千多万元。县里还在北京、上海、成都、深圳设了传习基地，60名学员接过故宫藏品唐卡复制的项目。觉囊唐卡工坊进了全国「非遗工坊典型案例」。</p>',
+    ]),
+
+  dict(title='印经院的印刷', sub='五 · 手艺的文明', lead='',
+    body=[
+      '<p>德格印经院本身是一门还在运转的印刷产业。1729年建，藏了32万余块雕版，其中古旧印版22.8万块，<strong>是全世界手工木刻印版藏量最多的地方</strong>。经版内容不止经文：宗教、历史、医学、天文历算、文学、艺术都有，「藏文化大百科全书」这个外号就是这么来的。</p>',
+      '<p>印刷是流水线工序：裁纸、泡纸、兑墨、研朱砂、印刷、晾晒、分页、核对、装订，十几道。印经书三人一组，一高一矮相对坐，高者固定印纸刷墨，矮者递纸、用卷布滚筒滚印，配合熟练的一天印2400张4800页。材料也讲究：<strong>藏纸用瑞香狼毒草的根，含毒，虫不蛀、鼠不咬</strong>；雕版用海拔3000米以上的红桦木，微火熏烤、水煮、烘干，刻好的版要过12次审校，在酥油里泡一天才算完成。</p>',
+    ]),
+
+  dict(title='印经院的规矩', sub='五 · 手艺的文明', lead='',
+    body=[
+      '<p><strong>印经院至今没通电</strong>，是怕火险伤经版，游客就着天光看印刷间。古旧经版现在限量印刷，近十年复刻了2.2万余块新版供印，古版封存，印版修复每年补刻230余块。2006年它进了国家级非遗，2009年被联合国教科文组织列入人类非物质文化遗产代表作名录。</p>',
+    ]),
+
+  dict(title='嘉绒藏寨与古碉', sub='六 · 建筑的方言',
+    lead='材料决定房子。',
+    body=[
+      '<p>建筑是材料和海拔的答案。石、木、土，各取所需，<strong>房子就是环境的说明书</strong>。</p>',
+      '<p>嘉绒藏寨与古碉，在丹巴一带最出名。石木结构，片石砌墙，房子依山势叠在山坡上，顶层外缘围一圈黄、黑、白三色带。甲居藏寨评上「中国最美的六大乡村古镇」之首，中路藏寨海拔2100米。丹巴古碉鼎盛时号称「千碉之国」，中路现存81座，梭坡乡84座，<strong>是全世界古碉最集中的地方</strong>。碉楼按功能分要隘碉、烽火碉、寨碉、家碉四类，还分雌雄，最早的能追溯到两千多年前的汉代。</p>',
+    ]),
+
+  dict(title='古碉的来历', sub='六 · 建筑的方言', lead='',
+    body=[
+      '<p>古碉的来历比寨子长。雏形约3500年前就出现，和丹巴中路罕额依的新石器遗址一脉相承。汉代，这一带的冉駹夷为抵御北方游牧羌人的进攻，在石室基础上建起碉楼，《后汉书》记载他们「累石为室，高者至十余丈，为邛笼」，邛笼就是碉楼。明清碉楼最多时约3000座（清康熙年间按4283户推算）。乾隆两次用兵大小金川，前后打了十几年，金川「地险碉坚」，清军动火炮才拿下。防御做得很细：碉门开在二层楼高的位置，战时收独木梯、关碉门；射击孔做成喇叭形，墙外收窄、墙内放宽，挡得住箭，又不挡视线；墙底厚1.5到2米，顶部收薄到0.5到0.6米。还有一条老规矩：谁家生了男孩就修高碉，<strong>男孩长到18岁，碉楼修完18层，办完成人礼才成家</strong>。</p>',
+    ]),
+
+  dict(title='藏寨的结构', sub='六 · 建筑的方言', lead='',
+    body=[
+      '<p>藏寨的结构，从下到上一条线。以甲居藏寨为例，石木结构，三到四层，各层逐层内收，顶上留出晒粮平台。底层圈养牲畜兼做仓库，畜圈的门和人进出的门分开；二层是锅庄火塘、厨房和客堂，一家人围着火塘吃饭说话，是日常生活的中心；三层住人；顶层是经堂，全楼装饰最华美、画满壁画，长者交出管家权后在这里吃斋念经，办婚丧嫁娶时做法事的喇嘛也暂住这层。屋顶四角各凸起一个白石塔，代表山、树、水、地四方神灵，上插经幡；楼沿中间有煨桑炉，有大事时点柏枝祭神。<strong>藏人把这套布局看成一张「六道轮回图」：底层是牲畜，中层是凡间，顶层是精神世界。</strong>层与层之间用独木梯上下。</p>',
+    ]),
+
+  dict(title='崩科与民居', sub='六 · 建筑的方言', lead='',
+    body=[
+      '<p>道孚崩科，是另一条路线。「崩」是以木为框架，「科」是房子。圆木对劈、卯榫咬合，<strong>整栋房不用一颗铁钉</strong>。上世纪70年代鲜水河流域大地震，片石墙房成片倒塌，工匠们发现德格一带的「崩科」抗震厉害，道孚重建时把这套做法吸收过来。崩科大小以「空」计数，四根柱子之间算一空，约25平方米。室内精雕细镂、描金绘彩，外号「民间故宫」。</p>',
+      '<p>民居在藏寨之外还有几路。乡城白藏房，2020年评上「中国白藏房文化之乡」，现存约4000栋，土木结构，土墙夯筑，能用上百年，墙体收成梯形，大小以「柱间」计数，一户35到68根柱。传统上是五六层，底层养牲畜，二层住人，上面晒粮，经堂永远在最高处。每年有个「白色灌礼」的民俗，用山上一种白土拌水从墙头浇下来，把墙浇白，既加固又祈福。木雅藏房在康定木雅地区，片石砌筑，外观古朴庄重。羌族的桃坪羌寨在阿坝理县，房子叫「庄房」，全石砌成，<strong>工匠不绘图、不计算，凭经验垒</strong>，石墙一层层向内收分，屋顶平台家家相连，外号「东方神秘古堡」。寨里的羌碉9层、高约30米，经受了1933年叠溪、2008年汶川几次大地震。</p>',
+      '<p>材料和气候不同，寨子的做法就不同。</p>',
+    ]),
+
+  dict(title='寺院建筑', sub='六 · 建筑的方言', lead='',
+    body=[
+      '<p>寺院建筑，有一套固定骨架：大经堂（指钦）是核心，佛学院（礼仓）、佛殿（拉康）、印经院在侧，整体依山而建，不追求中轴线对称。大经堂空间高阔、柱网密集，阿坝格尔登寺的大经堂有120根柱子。<strong>金顶是等级的标志</strong>，重檐歇山、铜瓦鎏金，顶上立镏金宝瓶、法轮金鹿，是藏汉结合的做法，色达东嘎寺主殿金顶用真金箔，几公里外都看得见。辩经场挨着佛学院，僧人在空地上拍掌问答；转经廊绕着佛堂或佛塔排满转经轮，格尔登寺49米高的佛塔外围有几百个小转经轮。各教派都能看：理塘长青春科尔寺1580年建，占地33万平方米，是康区规模最大的格鲁寺；马尔康大藏寺是嘉绒碉房式；木雅地区还有汉藏结合的碉楼经堂。苯教寺院另成一路，金川雍忠拉顶寺是代表。</p>',
+    ]),
+
+  dict(title='出发清单与藏语', sub='附录', lead='',
+    body=[
+      '<ul class="card__list">'
+      '<li>证件：身份证、驾驶证、行驶证，随身带好</li>'
+      '<li>药品：乙酰唑胺（遵医嘱）、布洛芬、感冒药、肠胃药、红景天（出发前就开始吃，只作辅助）</li>'
+      '<li>衣物：抓绒、羽绒、冲锋衣，帽子、墨镜、防晒霜，保温杯</li>'
+      '<li>装备：指夹式血氧仪、离线地图</li>'
+      '<li>车：拖车绳、防滑链、充气泵、补胎工具</li>'
+      '</ul>',
+      '<ul class="card__cwords">'
+      '<li><b>扎西德勒</b>吉祥如意，最通用的问候</li>'
+      '<li><b>突及其</b>谢谢</li>'
+      '<li><b>卡里沛</b>您慢走（送别时说）</li>'
+      '<li><b>卡里秀</b>您留步（自己留步时说）</li>'
+      '<li><b>广达</b>对不起</li>'
+      '<li><b>嘎地</b>辛苦了</li>'
+      '</ul>',
+    ]),
+
+  dict(title='官方渠道与延伸阅读', sub='附录', lead='',
+    body=[
+      '<ul class="card__list">'
+      '<li>路况：阿坝州政府官网「阿坝路况」专栏、四川发布和成都发布公众号</li>'
+      '<li>高速救援：12122，报警：96122</li>'
+      '<li>充电：特来电、国网e充电、星星充电App，或高德新能源模式</li>'
+      '<li>出发当天早上，把官方路况和气象预警查一次，和地图App交叉看</li>'
+      '</ul>',
+      '<ul class="card__cwords">'
+      '<li><b>香巴拉深处</b>纪录片，2018，豆瓣8.7。四川藏区人文，理塘、金川、稻城亚丁都在片里，讲普通人过日子</li>'
+      '<li><b>第三极</b>纪录片，青藏高原全貌，和《香巴拉深处》同一个总制片人</li>'
+      '<li><b>尘埃落定</b>阿来，2000年茅盾文学奖。写阿坝马尔康的嘉绒土司，路上看的碉楼寨房就是小说里的世界</li>'
+      '<li><b>艽野尘梦</b>陈渠珍。清末川藏亲历记，羌塘逃生115人活7人，跳过导读读正文</li>'
+      '</ul>',
+    ]),
+]
+
+CSS = """
+  :root{
+    --ink:#1e2530;
+    --paper:#ece5d4;
+    --dim:#a89f8a;
+    --vermilion:#c1493f;
+    --gold:#d9b23c;
+    --flag-blue:#2f6fd0;
+    --flag-white:#ece5d4;
+    --flag-red:#d9553f;
+    --flag-yellow:#d9b23c;
+    --flag-green:#3d9e7f;
+    --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong",serif;
+    --sans:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#3a4152;padding:0;font-family:var(--serif);}
+
+  .card{
+    width:1080px;height:1440px;
+    background:var(--paper);color:var(--ink);
+    padding:0;
+    display:flex;flex-direction:column;position:relative;
+    margin:0 auto;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .card + .card{margin-top:64px;}
+
+  .flag{display:flex;height:14px;width:100%;}
+  .flag span{flex:1;}
+
+  .card__inner{
+    flex:1;display:flex;flex-direction:column;
+    padding:56px 64px 52px;
+  }
+  .card__kicker{
+    font-family:var(--sans);color:var(--gold);
+    font-size:21px;letter-spacing:.34em;text-align:center;margin-top:26px;
+  }
+  .card__title{
+    font-size:56px;font-weight:700;text-align:center;
+    letter-spacing:.07em;line-height:1.4;margin:22px 0 4px;
+  }
+  .card__sub{
+    font-size:25px;color:var(--dim);text-align:center;
+    letter-spacing:.12em;margin-bottom:10px;font-family:var(--sans);
+  }
+  .card__rule{
+    width:190px;height:3px;background:var(--gold);
+    border:none;margin:18px auto 44px;position:relative;
+  }
+  .card__rule:before{
+    content:"";position:absolute;left:50%;top:-5px;transform:translateX(-50%);
+    width:7px;height:13px;background:var(--vermilion);
+  }
+
+  .card__lead{
+    color:var(--vermilion);font-size:31px;line-height:1.85;
+    border-left:4px solid var(--vermilion);padding-left:20px;
+    margin-bottom:42px;letter-spacing:.02em;
+  }
+  .card__body{font-size:29px;line-height:1.92;color:var(--ink);}
+  .card__body p{margin-bottom:1em;text-align:justify;}
+  .card__body p:last-child{margin-bottom:0;}
+
+  .card strong{
+    background:var(--vermilion);color:#fff;font-weight:700;
+    padding:0 .14em;border-radius:4px;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  }
+
+  .card__keys{list-style:none;margin:28px 0 34px;}
+  .card__keys li{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-size:32px;border-bottom:1px dashed rgba(30,37,48,.28);
+    padding:17px 2px;
+  }
+  .card__keys li:last-child{border-bottom:none;}
+  .card__keys li b{
+    color:var(--vermilion);font-weight:600;font-size:26px;
+    font-family:var(--sans);letter-spacing:.06em;white-space:nowrap;
+  }
+
+  .card__list{list-style:none;margin:6px 0 0;}
+  .card__list li{
+    padding:.28em 0;padding-left:1.1em;position:relative;
+  }
+  .card__list li:before{content:"·";position:absolute;left:0;color:var(--vermilion);}
+  .card__cwords{list-style:none;margin:6px 0 0;}
+  .card__cwords li{padding:.24em 0;}
+  .card__cwords b{
+    display:inline-block;min-width:4.6em;color:var(--vermilion);font-weight:600;
+    font-family:var(--sans);letter-spacing:.04em;
+  }
+
+  .card__foot{
+    margin-top:auto;display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--sans);color:var(--dim);
+    font-size:20px;letter-spacing:.14em;
+  }
+  .card__foot .foot-flag{display:flex;height:5px;width:96px;}
+  .card__foot .foot-flag span{flex:1;}
+"""
+
+JS = """
+<script>
+  (function(){
+    var q = new URLSearchParams(location.search).get('card');
+    if (q){
+      var idx = parseInt(q,10) - 1;
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function(c,i){ c.style.display = (i === idx) ? 'flex' : 'none'; });
+    }
+  })();
+</script>
+"""
+
+
+def render(cards):
+    parts = []
+    for i, c in enumerate(cards, 1):
+        inner = ['<div class="flag" aria-hidden="true">' + FLAG + '</div>']
+        inner.append('<div class="card__inner">')
+        inner.append('<div class="card__kicker">李大妈的自驾路书</div>')
+        inner.append('<h2 class="card__title">' + c['title'] + '</h2>')
+        inner.append('<div class="card__sub">' + c['sub'] + '</div>')
+        inner.append('<hr class="card__rule">')
+        if c.get('lead'):
+            inner.append('<p class="card__lead">' + c['lead'] + '</p>')
+        inner.append('<div class="card__body">')
+        inner.extend(c['body'])
+        inner.append('</div>')
+        inner.append('<div class="card__foot">')
+        inner.append('<span>川西自驾行前笔记</span>')
+        inner.append('<span class="foot-flag" aria-hidden="true">' + FLAG + '</span>')
+        inner.append('<span>' + ('%02d' % i) + '</span>')
+        inner.append('</div>')
+        inner.append('</div>')
+        parts.append('<div class="card" id="card%d">%s</div>' % (i, ''.join(inner)))
+    return '\n\n'.join(parts)
+
+
+HTML = ('<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+        '<title>川西自驾行前笔记 · 小红书卡片</title>\n<style>\n' + CSS +
+        '</style>\n</head>\n<body>\n\n' + render(CARDS) +
+        '\n\n' + JS + '\n</body>\n</html>\n')
+
+with open('cards.html', 'w', encoding='utf-8') as f:
+    f.write(HTML)
+
+print('generated cards.html with %d cards' % len(CARDS))
