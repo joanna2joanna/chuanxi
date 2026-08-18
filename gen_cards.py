@@ -337,7 +337,8 @@ def render_card(i, blocks):
     inner.append('<div class="card__foot">')
     # 首页已有 kicker 品牌字，页脚不再重复；其余页左下角写品牌
     inner.append('<span>' + ('李大妈的自驾路书' if i > 1 else '') + '</span>')
-    inner.append('<span class="foot-flag" aria-hidden="true">' + FLAG + '</span>')
+    if i == 1:
+        inner.append('<span class="foot-flag" aria-hidden="true">' + FLAG + '</span>')
     inner.append('<span>' + ('%02d' % i) + '</span>')
     inner.append('</div>')
     inner.append('</div>')
