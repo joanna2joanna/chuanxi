@@ -13,7 +13,7 @@ FLAG = ('<span style="background:var(--flag-blue)"></span>'
 
 # ---- 网页内容块，原样搬运 ----
 
-KEYS = ('<ul class="card__keys"><li><span>海拔决定秩序</span><strong>一 高原的秩序</strong></li> <li><span>山河决定地图</span><strong>二 山河的地图</strong></li> <li><span>车是腿，慢是快</span><strong>三 路上的驾驶学</strong></li> <li><span>看墙色认教派</span><strong>四 信仰的世界</strong></li> <li><span>手艺是还在运转的产业</span><strong>五 手艺的文明</strong></li> <li><span>材料决定房子</span><strong>六 建筑的方言</strong></li></ul>')
+KEYS = ('<ul class="card__keys"><li><span>海拔决定秩序</span><strong>一　高原的秩序</strong></li> <li><span>山河决定地图</span><strong>二　山河的地图</strong></li> <li><span>车是腿，慢是快</span><strong>三　路上的驾驶学</strong></li> <li><span>看墙色认教派</span><strong>四　信仰的世界</strong></li> <li><span>手艺是还在运转的产业</span><strong>五　手艺的文明</strong></li> <li><span>材料决定房子</span><strong>六　建筑的方言</strong></li></ul>')
 
 PAGE1 = [
   ('kicker', '李大妈的自驾路书'),
