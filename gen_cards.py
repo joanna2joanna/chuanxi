@@ -196,8 +196,11 @@ CSS = """
   .card ul.card__cwords{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
   .card__cwords li{padding:.24em 0;}
   .card__cwords b{
-    display:inline-block;min-width:4.6em;color:var(--vermilion);font-weight:600;
+    background:var(--vermilion);color:#fff;font-weight:700;
+    padding:0 .14em;border-radius:4px;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
     font-family:var(--sans);letter-spacing:.04em;
+    margin-right:1em;white-space:nowrap;
   }
 
   .card p,.card li{text-wrap:pretty;}
