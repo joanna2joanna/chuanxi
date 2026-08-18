@@ -201,7 +201,6 @@ CSS = """
     background:var(--vermilion);color:#fff;font-weight:700;
     padding:0 .14em;border-radius:4px;
     box-decoration-break:clone;-webkit-box-decoration-break:clone;
-    font-family:var(--sans);letter-spacing:.04em;
     margin-right:1em;white-space:nowrap;
   }
 
