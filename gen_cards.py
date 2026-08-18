@@ -186,7 +186,7 @@ CSS = """
   }
   .card__keys li:last-child{border-bottom:none;}
   .card__keys li strong{
-    font-size:26px;letter-spacing:.06em;white-space:nowrap;
+    letter-spacing:.06em;white-space:nowrap;
   }
 
   .card ul.card__list{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
