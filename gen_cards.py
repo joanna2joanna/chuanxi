@@ -30,7 +30,7 @@ BODY_STREAM = [
   ('p', '<strong>匠人。</strong> 进工坊先问能不能看，问手艺、问工序，匠人愿意聊就聊。工具和材料不上手碰。买现货，半成品和机压仿品不碰。'),
   ('p', '<strong>僧侣。</strong> 称呼用「师父」或「上师」。进大殿脱帽、轻声、顺时针走，不拍照、不指佛像。法会时安静看，不打断、不围观起哄。'),
   ('p', '<strong>司机和本地人。</strong> 见面一句「扎西德勒」，气氛就开了。问路、问价，态度客气，多数人都愿意答。高原上的人大多直接，不绕弯，打交道也直接。'),
-  ('p', '<strong>买东西。</strong> 讲好价就认，不反复缠价。看上了再还价，压完不买最伤和气。'),
+  ('p', '<strong>买东西。</strong> 讲好价就认，不反复缠价。看上了再还价，压完不买<span class="nowrap">最伤和气。</span>'),
   ('p', '<strong>拍照。</strong> 拍人先问，拍寺院内部和法会先看有没有禁令。相机镜头对着人的时候，先问一句，多数人会同意的。'),
   ('h2', '高原的秩序'),
   ('lead', '海拔决定秩序。'),
@@ -46,7 +46,7 @@ BODY_STREAM = [
   ('p', '河流往三处去。东部是大渡河，小金、金川、丹巴都在它的水系里；雅砻江从甘孜县城边流过；金沙江是德格的西界，德格县城在金沙江东岸。三条江各走各的，最后都汇进长江。'),
   ('p', '海子是古冰川留下的湖。冰期冰川刨出的洼地积水成湖，理塘到稻城之间的海子山，古冰川退去后留下1145个高原湖泊。单个看，康定的木格措、九龙的伍须海、巴塘的措普湖各有各的颜色，德格雀儿山下的新路海紧挨着雪峰。'),
   ('p', '川西地震多，因为它在鲜水河断裂带上。这条断裂带从中部纵贯，历史上强震不断。对旅行者，最实在的是<strong>路况随时可能因塌方管制</strong>；很多陡崖和河谷的走向，就是断裂带运动的痕迹。'),
-  ('p', '植被随海拔分层，从山谷到垭口一路换。2500米以下是针阔混交林；2500到3500米是云杉冷杉的针叶林，高山杜鹃夹在林里；3500到4500米是高山灌丛和高山草甸，冬虫夏草、雪茶都长在这一层；4500米以上是流石滩，雪莲贴着碎石长。<strong>同一条路翻几座山，一天走完四个植被带。</strong>'),
+  ('p', '植被随海拔分层，从山谷到垭口一路换。2500米以下是针阔混交林；2500到3500米是云杉冷杉的针叶林，高山杜鹃夹在林里；3500到4500米是高山灌丛和高山草甸，冬虫夏草、雪茶都长在这一层；4500米以上是流石滩，雪莲贴着碎石长。<strong>同一条路翻几座山，一天走完四个<span class="nowrap">植被带。</span></strong>'),
   ('p', '吃的也跟海拔走。青稞是高原的当家作物，炒熟磨成糌粑，拌上酥油茶捏成团，是藏人的日常主食；酥油茶用砖茶和酥油熬，热量高、解渴御寒，当地有<strong>「宁可三日无肉，不可一日无茶」</strong>的说法。牦牛在海拔3500米以上放养，肉干、火锅、炖汤都常见；血肠是待客的上等菜，牛血或羊血和肉丁灌进小肠煮熟。松茸这类菌子长在森林里，集中在金沙江、雅砻江、大渡河上中游的高山峡谷，夏秋雨后出得多，炖鸡、涮锅都常吃。这些不用刻意找，路边饭馆的菜单上就有。'),
   ('h2', '路上的驾驶学'),
   ('lead', '车是腿，慢是快。一半技术，一半克制。'),
@@ -58,7 +58,7 @@ BODY_STREAM = [
   ('h3', '充电'),
   ('p', '川西这两年变化快。2025年6月甘孜州18个公路养护站和14个快充站投运，理塘到稻城段充电桩最大间距125公里；318沿线超300个充电桩，快充占七成以上。密度从东往西递减：成都到康定每30到50公里一个快充；康定、新都桥、雅江、理塘每80到150公里；理塘往稻城亚丁、新都桥往塔公八美每150到200公里。冷嘎措、格聂、若尔盖穿越段还是盲区。实际体验要打折：约一成五的桩故障或被燃油车占位，节假日热门站排队可能超一小时。高原续航缩水约三四成。<strong>电量低于三成就找桩</strong>，进景区前在县城充到八成以上。查桩用特来电、国网e充电、星星充电的App，或高德的新能源模式。'),
   ('h3', '封路信息'),
-  ('p', '两类封路最常见：汛期6到8月塌方落石，抢修期间半幅放行或管制；冬季11月到次年3、4月冬管，比如九绵高速夜间20点到次日8点禁行，夹金山段整个冬天双向禁行，理小路冬天全段禁行。截至2026年8月17日，阿坝州正实行货车临时管制（过境4轴及以上货车白天7点到21点禁行），同时处在汛期，山洪预警可能随时发布。<strong>G317马尔康到观音桥段，自2025年11月红旗特大桥垮塌后一直中断</strong>，绕行走壤塘、阿坝、红原方向，约多3小时；官方便道工程预计2026年9月底至10月初通车。官方渠道：阿坝州政府官网阿坝路况专栏、四川发布和成都发布公众号、高速救援12122、报警96122。<strong>官方路况和高德，出发当天交叉核对</strong>。'),
+  ('p', '两类封路最常见：汛期6到8月塌方落石，抢修期间半幅放行或管制；冬季11月到次年3、4月冬管，比如九绵高速夜间20点到次日8点禁行，夹金山段整个冬天双向禁行，理小路冬天全段禁行。<strong>G317马尔康到观音桥段，自2025年11月红旗特大桥垮塌后一直中断</strong>，绕行走壤塘、阿坝、红原方向，约多3小时；官方便道工程预计2026年9月底至10月初通车。官方渠道：阿坝州政府官网阿坝路况专栏、四川发布和成都发布公众号、高速救援12122、报警96122。<strong>官方路况和高德，出发当天交叉核对</strong>。'),
   ('h2', '信仰的世界'),
   ('lead', '看墙色，认教派。'),
   ('p', '川西在藏文化版图里的位置。藏区习惯分成三大块：拉萨一带的卫藏，青海甘肃的安多，还有以甘孜、昌都为核心的康巴。康巴人性格外放，「康巴汉子」的名声就是这么来的。和卫藏、安多不同，川西<strong>没有哪个教派一家独大</strong>。甘孜州登记的藏传佛教寺院有515座，宁玛、格鲁、萨迦、噶举、苯教五大教派齐全，哪个都占不到一半。'),
@@ -142,37 +142,37 @@ CSS = """
 
   .card__kicker{
     font-family:var(--sans);color:var(--gold);
-    font-size:21px;letter-spacing:.34em;text-align:center;margin-bottom:20px;
+    font-size:23px;letter-spacing:.34em;text-align:center;margin-bottom:20px;
   }
   .card h1{
-    font-size:56px;font-weight:700;text-align:center;
-    letter-spacing:.07em;line-height:1.4;
+    font-size:112px;font-weight:700;text-align:center;
+    letter-spacing:.02em;line-height:1.4;
   }
   .card__intro{
-    font-size:26px;line-height:1.9;color:var(--dim);
+    font-size:28px;line-height:1.9;color:var(--dim);
     text-align:center;margin:26px 0 8px;
   }
   .card__meta{
-    font-family:var(--serif);font-size:22px;line-height:1.7;
+    font-family:var(--serif);font-size:24px;line-height:1.7;
     text-align:center;color:var(--dim);margin-bottom:6px;
   }
 
   .card h2{
-    font-size:36px;font-weight:700;color:var(--vermilion-deep);
+    font-size:40px;font-weight:700;color:var(--vermilion-deep);
     text-align:center;letter-spacing:.12em;line-height:1.5;
     margin:30px 0 20px;
   }
   .card h3{
-    font-family:var(--sans);font-size:26px;font-weight:600;
+    font-family:var(--sans);font-size:31px;font-weight:600;
     letter-spacing:.24em;color:var(--vermilion-deep);
     margin:34px 0 14px;
   }
   .card__lead{
-    color:var(--vermilion);font-size:30px;line-height:1.9;
+    color:var(--vermilion);font-size:32px;line-height:1.9;
     border-left:4px solid var(--vermilion);padding-left:20px;
     margin-bottom:28px;
   }
-  .card p{font-size:29px;line-height:1.92;color:var(--ink);text-align:justify;margin-bottom:1em;}
+  .card p{font-size:31px;line-height:1.92;color:var(--ink);text-align:justify;margin-bottom:1em;}
   .card p:last-child{margin-bottom:0;}
 
   .card strong{
@@ -184,7 +184,7 @@ CSS = """
   .card__keys{list-style:none;margin:28px 0 34px;}
   .card__keys li{
     display:flex;justify-content:space-between;align-items:baseline;
-    font-size:32px;border-bottom:1px dashed rgba(30,37,48,.28);
+    font-size:34px;border-bottom:1px dashed rgba(30,37,48,.28);
     padding:16px 2px;
   }
   .card__keys li:last-child{border-bottom:none;}
@@ -192,10 +192,10 @@ CSS = """
     letter-spacing:.06em;white-space:nowrap;
   }
 
-  .card ul.card__list{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
+  .card ul.card__list{list-style:none;margin:6px 0 0;font-size:31px;line-height:1.92;}
   .card__list li{padding:.28em 0;padding-left:1.1em;position:relative;}
   .card__list li:before{content:"·";position:absolute;left:0;color:var(--vermilion);}
-  .card ul.card__cwords{list-style:none;margin:6px 0 0;font-size:29px;line-height:1.92;}
+  .card ul.card__cwords{list-style:none;margin:6px 0 0;font-size:31px;line-height:1.92;}
   .card__cwords li{padding:.24em 0;}
   .card__cwords b{
     background:var(--vermilion);color:#fff;font-weight:700;
@@ -211,7 +211,7 @@ CSS = """
   .card__foot{
     margin-top:auto;display:flex;justify-content:space-between;align-items:center;
     font-family:var(--sans);color:var(--dim);
-    font-size:20px;letter-spacing:.14em;padding-top:36px;flex-shrink:0;
+    font-size:22px;letter-spacing:.14em;padding-top:36px;flex-shrink:0;
   }
   .card__foot .foot-flag{display:flex;height:5px;width:96px;}
   .card__foot .foot-flag span{flex:1;}
@@ -234,8 +234,8 @@ JS = """
 """
 
 
-CPL = 32   # 正文一行约能放的字数（内容区 952px / 29px）
-LHP = 56   # 正文一行高度（29px × 1.92）
+CPL = 30   # 正文一行约能放的字数（内容区 952px / 31px）
+LHP = 60   # 正文一行高度（31px × 1.92）
 
 
 def _lines(t):
@@ -246,21 +246,21 @@ def block_height(kind, html):
     """按 CSS 实际尺寸估算块高度（px），用于防止内容超高、页脚被挤出卡片。"""
     t = re.sub(r'<[^>]+>', '', html)
     if kind == 'kicker':
-        return 49  # 21px×1.4 + 下 margin 20
+        return 52  # 23px×1.4 + 下 margin 20
     if kind == 'h1':
-        return 78  # 56px×1.4，单行
+        return 157  # 112px×1.4，单行
     if kind == 'intro':
-        return math.ceil(len(t) / 36) * 49 + 34  # 26px×1.9，内容区能放约 36 字/行
+        return math.ceil(len(t) / 34) * 53 + 34  # 28px×1.9，内容区能放约 34 字/行
     if kind == 'meta':
-        return math.ceil(len(t) / 43) * 37 + 6  # 22px×1.7，约 43 字/行
+        return math.ceil(len(t) / 40) * 41 + 6  # 24px×1.7，约 40 字/行
     if kind == 'h2':
-        return 104  # 36px×1.5 + 上下 margin 50
+        return 117  # 40px×1.5 + 上下 margin 57
     if kind == 'h3':
-        return 85   # 26px×1.4 + 上下 margin 48
+        return 100  # 31px×1.4 + 上下 margin 57
     if kind == 'lead':
-        return math.ceil(len(t) / 31) * 57 + 28  # 30px×1.9，内容区去掉左边竖线留白
+        return math.ceil(len(t) / 30) * 61 + 28  # 32px×1.9，内容区去掉左边竖线留白
     if kind == 'keys':
-        return 524  # 6 项 × 77 + 上下 margin 62
+        return 561  # 6 项 × 82 + 上下 margin 69
     if kind == 'pb':
         return 0  # 手动分页标记，不占高度
     if kind in ('list', 'cwords'):
