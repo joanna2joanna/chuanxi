@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rli \"nvwa\\\\|女娲\" /Users/joanna/.claude 2>/dev/null | head -50; echo \"---\"; find /Users/joanna -iname \"*nvwa*\" -not -path \"*/node_modules/*\" -not -path \"*/.git/*\" 2>/dev/null | head -50)",
+      "Read(//Users/joanna/**)",
+      "Bash(ls -la /Users/joanna/Projects/chuanxi/.claude/skills 2>/dev/null; echo \"===zoutopia skills===\"; ls -la /Users/joanna/Projects/zoutopia/drafts/.claude/skills 2>/dev/null; echo \"===home skills===\"; ls -la /Users/joanna/.claude/skills 2>/dev/null)",
+      "Read(//Users/joanna/Projects/zoutopia/drafts/.claude/skills/**)",
+      "Read(//Users/joanna/Projects/zoutopia/drafts/.agents/skills/huashu-nuwa/**)",
+      "Read(//Users/joanna/Projects/zoutopia/drafts/.claude/skills/zoustyle/**)",
+      "Bash(perl -CSD -pe 's/「/\"/g; s/」/\"/g' jiarong-note.md)"
+    ]
+  }
+}
